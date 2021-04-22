@@ -2,14 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SingleBoatController : MonoBehaviour
 {
 
     public float BoatSpeed;
     public int BoatCrashes;
+    public int BoatTimer;
     public GameObject BoatMotor;
     public Rigidbody BoatMotorBody;
+    public TextMeshProUGUI TextTime;
+    public TextMeshProUGUI TextCrashes;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +21,8 @@ public class SingleBoatController : MonoBehaviour
 
         //Gets the rigidbody from the boat motor.
         BoatMotorBody = BoatMotor.GetComponent<Rigidbody>();
+        InvokeRepeating("TimerAdd", 1.0f, 1.0f);
+
 
     }
 
@@ -46,6 +52,15 @@ public class SingleBoatController : MonoBehaviour
         if(collision.gameObject.tag == "Boat")
         {
             BoatCrashes += 1;
+            TextCrashes.text = "Crashes: " + BoatCrashes.ToString();
         }
+    }
+
+    private void TimerAdd()
+    {
+        BoatTimer += 1;
+        int min = (BoatTimer / 60);
+        int sec = (BoatTimer % 60);
+        TextTime.text = "Time: " + min.ToString() + ":" + ((sec < 10) ? "0" : "") + sec.ToString();
     }
 }

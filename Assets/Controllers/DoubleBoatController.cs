@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DoubleBoatController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class DoubleBoatController : MonoBehaviour
     public Rigidbody BoatMotorBody1;
     public GameObject BoatMotor2;
     public Rigidbody BoatMotorBody2;
+    public TextMeshPro TextTime;
+    public TextMeshPro TextCrashes;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +58,7 @@ public class DoubleBoatController : MonoBehaviour
         if(collision.gameObject.tag == "Boat")
         {
             BoatCrashes += 1;
+            TextCrashes.text = "Crashes: " + BoatCrashes.ToString();
         }
     }
 }
